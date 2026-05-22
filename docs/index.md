@@ -1,17 +1,17 @@
 # AI translation using LibreTranslate
 
-In addition to general AI models, some specialise in a particular area such as image generation or writing code. Translation is an often overlooked area where the use of AI is practical and efficient for developers. Google Translate in various different forms is best known of these, but LibreTranslate is a free and open-source alternative which has some advantages for developers:
+In addition to general AI models, some focus on a particular area such as image generation or writing code. One sometimes overlooked specialization is Translation AIs. Google Translate is the best known of these, but LibreTranslate is a free and open-source alternative which has some advantages for developers:
 
 - Free and open source
-- Can run self-hosted / air-gapped / IoT
+- Can run self-hosted / in air-gapped environments 
 - Works with a simple REST API 
 - Trainable on your own data
 
-By the end of this short tutorial you will be able to run a LibreTranslate service locally and use a Python script to translate strings into more than 30 different languages using its REST API.
+By the end of this short tutorial you will be able to run a LibreTranslate service locally and use a Python script to translate strings into more than 30 different languages using its REST API, no signups, subscriptions or tokens required.
 
 ## 1. Install and Run the LibreTranslate Server
 
-Self-hosting services can often seem like a lot of effort, but LibreTranslate just takes a couple of steps. The recommended way (for all platforms) is to use the official Docker image. This is definitely the right choice if you want to use this as a permanent service (see the [official documentation](https://docs.libretranslate.com/guides/installation/) for a number of ways to set up and manage it). However, if you are already working with Python and want to try it out you can just use `pip` to install it:
+Self-hosting services can often seem like a lot of effort, but LibreTranslate just takes a couple of steps. The recommended way (for all platforms) is to use the official Docker image. This is definitely the right choice if you want to use LibreTranslate as a permanent service (see the [official documentation](https://docs.libretranslate.com/guides/installation/) for a number of ways to install and manage it). However, if you are already working with Python and want to try it out you can just use `pip` to install it:
 
 ```
 pip install libretranslate
@@ -31,7 +31,7 @@ By default LibreTranslate will run its service on the local host at port 5000. I
 
 ## 2. Access the API With Python
 
-There is a specific Python package for working with LibreTranslate,[libretranslatepy](https://github.com/argosopentech/LibreTranslate-py). However, the API is not extensive or complicated to use with standard requests so it isn't really necessary to add extra dependencies. To translate a string, just construct a JSON payload and send it to the server using the [`requests`](https://realpython.com/python-requests/) package. Here's an example script which constructs the required HTTP request from your input and prints out the received translation:
+There is a specific Python package for working with LibreTranslate, [libretranslatepy](https://github.com/argosopentech/LibreTranslate-py). However, the API is not extensive or complicated to use with standard requests so it isn't really necessary to add extra dependencies. To translate a string, just construct a JSON payload and send it to the server using the [`requests`](https://realpython.com/python-requests/) package. Here's an example script which constructs the required HTTP request from your input and prints out the processed translation:
 
 ``` py title="translate_text.py"
 import requests
@@ -60,12 +60,9 @@ Here's a quick explanation of what is being passed to the server in the payload 
 The return values from the request are then stored in 'response' and output to the user. For a real application you would want to add checks to ensure that the response was valid.
 
 
-## 3. Some Cautionary Advice
+## Cautionary Advice
 
 AI translation is a great enabler, but as with all AI, it isn't perfect. For translation in particular, AI hallucinations lead to grammatically correct and convincing text which doesn't capture the intent of the original. 
 
-For example, although larger models can handle idioms well, smaller models often fail. Consider the French ***"Tu vas lui poser un lapin?"***. LibreTranslate will return ***"Are you gonna put a rabbit on them?"*** which, while the use of "gonna" tries to capture informal language, fails to spot that "putting a rabbit" on someone is a common French idiom for "standing them up". If your sources are free of idiomatic language, you'll get much better results.
-
-Also bear in mind that this model is running on your own hardware - trying to translate large amounts of text is going to be much slower than a cloud-based API.
-
+For example, although larger models can handle idioms well, smaller models often fail. Consider the French ***"Tu vas lui poser un lapin?"***. LibreTranslate will return ***"Are you gonna put a rabbit on them?"*** which, while the use of "gonna" tries to capture informal language, fails to process that "putting a rabbit" on someone is a common French idiom for failing to turn up to a date. If your sources are free of idiomatic language, you'll get much better results.
 
