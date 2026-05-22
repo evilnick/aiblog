@@ -61,7 +61,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#my-ai-pick-of-the-month" class="md-skip">
+        <a href="#ai-translation-using-libretranslate" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              My AI pick of the month
+              AI translation using LibreTranslate
             
           </span>
         </div>
@@ -199,7 +199,7 @@
           
   
   <span class="md-ellipsis">
-    My AI pick of the month
+    AI translation using LibreTranslate
   </span>
   
 
@@ -210,7 +210,7 @@
         
   
   <span class="md-ellipsis">
-    My AI pick of the month
+    AI translation using LibreTranslate
   </span>
   
 
@@ -232,22 +232,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#try-it-yourself" class="md-nav__link">
-    Try it yourself
+  <a href="#1-install-and-run-the-libretranslate-server" class="md-nav__link">
+    1. Install and Run the LibreTranslate Server
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-it-with-python" class="md-nav__link">
-    Using it with Python
+  <a href="#2-access-the-api-with-python" class="md-nav__link">
+    2. Access the API With Python
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-it-with-caution" class="md-nav__link">
-    Using it with caution
+  <a href="#3-some-cautionary-advice" class="md-nav__link">
+    3. Some Cautionary Advice
   </a>
   
 </li>
@@ -287,22 +287,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#try-it-yourself" class="md-nav__link">
-    Try it yourself
+  <a href="#1-install-and-run-the-libretranslate-server" class="md-nav__link">
+    1. Install and Run the LibreTranslate Server
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-it-with-python" class="md-nav__link">
-    Using it with Python
+  <a href="#2-access-the-api-with-python" class="md-nav__link">
+    2. Access the API With Python
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-it-with-caution" class="md-nav__link">
-    Using it with caution
+  <a href="#3-some-cautionary-advice" class="md-nav__link">
+    3. Some Cautionary Advice
   </a>
   
 </li>
@@ -322,43 +322,74 @@
                   
 
 
-<h1 id="my-ai-pick-of-the-month">My AI pick of the month</h1>
-<p>There are many AI tools which concentrate on specifics, such as image generation, 3D models or writing code, which seem to get all the attention. There are plenty of specialist AI tools which get less attention but which are, in their own way, just as useful. Here I want to briefly introduce one of them: LibreTranslate.</p>
-<p>The world has a rich diversity of languages, and it is always more comforting to read instructions, comments and explanations in one you are most familiar with. There are a number of translation implementations, probably the best known of which is Google Translate (there are actually several variations of the API), but I frequently find myself using LibreTranslate for tasks like translating emails, deciphering Chinese technical specs or generating static text for user interfaces. </p>
-<p>Here are some good reasons to opt for LibreTranslate:</p>
+<h1 id="ai-translation-using-libretranslate">AI translation using LibreTranslate</h1>
+<p>In addition to general AI models, some specialise in a particular area such as image generation or writing code. Translation is an often overlooked area where the use of AI is practical and efficient for developers. Google Translate in various different forms is best known of these, but LibreTranslate is a free and open-source alternative which has some advantages for developers:</p>
 <ul>
 <li>Free and open source</li>
 <li>Can run self-hosted / air-gapped / IoT</li>
 <li>Works with a simple REST API </li>
 <li>Trainable on your own data</li>
 </ul>
-<h2 id="try-it-yourself">Try it yourself</h2>
-<p>Self-hosted sounds like a lot of effort, but in reality, it just takes a couple of steps. The recommended way (for all platforms) is to use the official Docker image. This is definitely the right choice if you want to use this as a permanent service (you should check out the <a href="https://docs.libretranslate.com/guides/installation/">official documentation</a> for the various ways to set up and configure it). However, if you are already working with Python and want to try it out you can just use <code>pip</code>:</p>
-<p><div class="highlight"><pre><span></span><code>pip install libretranslate
+<p>By the end of this short tutorial you will be able to run a LibreTranslate service locally and use a Python script to translate strings into more than 30 different languages using its REST API.</p>
+<h2 id="1-install-and-run-the-libretranslate-server">1. Install and Run the LibreTranslate Server</h2>
+<p>Self-hosting services can often seem like a lot of effort, but LibreTranslate just takes a couple of steps. The recommended way (for all platforms) is to use the official Docker image. This is definitely the right choice if you want to use this as a permanent service (see the <a href="https://docs.libretranslate.com/guides/installation/">official documentation</a> for a number of ways to set up and manage it). However, if you are already working with Python and want to try it out you can just use <code>pip</code> to install it:</p>
+<div class="highlight"><pre><span></span><code>pip install libretranslate
 </code></pre></div>
-Then run the server:</p>
-<p><div class="highlight"><pre><span></span><code>libretranslate --load-only en,de,fr,zh
-</code></pre></div>
-If you omit the language arguments, LibreTranslate will download all the languages it knows (currently around 30) which will take some extra time.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you run into compiler errors when installing with pip, use the Docker image instead, which bypasses local dependency problems entirely.</p>
+<p>If you run into compiler errors when installing with pip, use the Docker installation method instead, which bypasses local dependency problems entirely.</p>
 </div>
-<p>By default LibreTranslate will run a service on the local host at port 5000. It also includes a simple web frontend you can use to check that it's running: <a href="http://localhost:5000/">http://localhost:5000/</a></p>
-<h2 id="using-it-with-python">Using it with Python</h2>
-<p>There is a specific Python package for working with LibreTranslate (<a href="https://github.com/argosopentech/LibreTranslate-py">libretranslatepy</a>), but actually the API is easy to use with standard requests so it isn't really necessary to add extra dependencies. To translate a string, just construct a JSON payload and send it to the server. Here's an example in the interactive Python shell:</p>
-<div class="highlight"><pre><span></span><code>&gt;&gt;&gt; import requests
-&gt;&gt;&gt; url = &quot;http://localhost:5000/translate&quot;
-&gt;&gt;&gt; mytext = &quot;This is all very interesting&quot;
-&gt;&gt;&gt; payload = { &quot;q&quot;: mytext, &quot;source&quot;: &quot;en&quot;, &quot;target&quot;: &quot;de&quot;, &quot;format&quot;: &quot;text&quot;}
-&gt;&gt;&gt; response = requests.post(url, json=payload)
-&gt;&gt;&gt; response.json()
-{&#39;translatedText&#39;: &#39;Das ist alles sehr interessant&#39;}
+<p>When running the server, you may wish to limit it to languages you are going to actually use, as loading each one takes some time and extra resources. Languages, identified by their <a href="https://www.loc.gov/standards/iso639-2/php/code_list.php">ISO 639 two-letter code</a>, can be supplied as an argument when starting the server. </p>
+<p><div class="highlight"><pre><span></span><code>libretranslate --load-only en,de,fr,zh
 </code></pre></div>
-<p>The API can also handle automatic language detection and deal with examples embedded in markup like HTML. There are more examples in the <a href="https://docs.libretranslate.com/guides/api_usage/">LibreTranslate API documentation</a>.</p>
-<h2 id="using-it-with-caution">Using it with caution</h2>
+In the above example the server will load English, German, French and Chinese.</p>
+<p>By default LibreTranslate will run its service on the local host at port 5000. It also includes a simple web frontend you can use to check that it's running: <a href="http://localhost:5000/">http://localhost:5000/</a></p>
+<h2 id="2-access-the-api-with-python">2. Access the API With Python</h2>
+<p>There is a specific Python package for working with LibreTranslate,<a href="https://github.com/argosopentech/LibreTranslate-py">libretranslatepy</a>. However, the API is not extensive or complicated to use with standard requests so it isn't really necessary to add extra dependencies. To translate a string, just construct a JSON payload and send it to the server using the <a href="https://realpython.com/python-requests/"><code>requests</code></a> package. Here's an example script which constructs the required HTTP request from your input and prints out the received translation:</p>
+<div class="highlight"><span class="filename">translate_text.py</span><pre><span></span><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://localhost:5000/translate&quot;</span>
+<span class="n">mytext</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the text to translate: &quot;</span><span class="p">)</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;q&quot;</span><span class="p">:</span> <span class="n">mytext</span><span class="p">,</span>
+           <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="s2">&quot;de&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">}</span>         
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span> <span class="sa">f</span><span class="s2">&quot;That translates to German as: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;translatedText&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Here's a quick explanation of what is being passed to the server in the payload described above:</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>q</td>
+<td>the query text to be translated</td>
+</tr>
+<tr>
+<td>source</td>
+<td>2-letter source language code (can be set to 'auto')</td>
+</tr>
+<tr>
+<td>target</td>
+<td>2-letter target language code</td>
+</tr>
+<tr>
+<td>format</td>
+<td>'text' or 'html' for formatted markup text</td>
+</tr>
+</tbody>
+</table>
+<p>The return values from the request are then stored in 'response' and output to the user. For a real application you would want to add checks to ensure that the response was valid.</p>
+<h2 id="3-some-cautionary-advice">3. Some Cautionary Advice</h2>
 <p>AI translation is a great enabler, but as with all AI, it isn't perfect. For translation in particular, AI hallucinations lead to grammatically correct and convincing text which doesn't capture the intent of the original. </p>
-<p>For example, although larger models can handle idioms well, smaller models often fail. Consider the French <strong><em>"Tu vas lui poser un lapin?"</em></strong>. LibreTranslate will return <strong><em>"Are you gonna put a rabbit on them?"</em></strong> which, while the use of "gonna" tries to capture informal language, fails to spot that "putting a rabbit" on someone is a common French idiom for "standing them up". If your sources are free of idiomatic language, you'll get much better results!</p>
+<p>For example, although larger models can handle idioms well, smaller models often fail. Consider the French <strong><em>"Tu vas lui poser un lapin?"</em></strong>. LibreTranslate will return <strong><em>"Are you gonna put a rabbit on them?"</em></strong> which, while the use of "gonna" tries to capture informal language, fails to spot that "putting a rabbit" on someone is a common French idiom for "standing them up". If your sources are free of idiomatic language, you'll get much better results.</p>
+<p>Also bear in mind that this model is running on your own hardware - trying to translate large amounts of text is going to be much slower than a cloud-based API.</p>
 
 
 
