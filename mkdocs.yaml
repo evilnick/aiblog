@@ -1,0 +1,7 @@
+site_name: AI with Python
+theme:
+  name: material 
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
