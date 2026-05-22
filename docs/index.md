@@ -44,8 +44,7 @@ payload = {"q": mytext,
            "format": "text"}         
 response = requests.post(url, json=payload)
 
-print( f"That translates to German as: {response.json()['translatedText']}")
-
+print(f"That translates to German as: {response.json()['translatedText']}")
 ```
 
 Here's a quick explanation of what is being passed to the server in the payload described above:
