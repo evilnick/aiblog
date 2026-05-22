@@ -1,4 +1,4 @@
-# AI translation using LibreTranslate
+# AI Translation Using LibreTranslate
 
 In addition to general AI models, some focus on a particular area such as image generation or writing code. One often-overlooked specialization is AI translation. Google Translate is the best-known example, but LibreTranslate is a free and open-source alternative with several advantages for developers:
 
